@@ -1,0 +1,17 @@
+{
+    "dataset": "mnist",
+    "epochs": 10,
+    "batch_size": 64,
+    "optimizer": "rmsprop",
+    "learning_rate": 0.001,
+    "weight_decay": 0.0,
+    "num_layers": 1,
+    "hidden_size": [
+        64
+    ],
+    "activation": "relu",
+    "weight_init": "xavier",
+    "loss": "cross_entropy",
+    "model_path": "best_model.npy",
+    "wandb_project": "dl_1"
+}
