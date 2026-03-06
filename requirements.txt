@@ -1,0 +1,15 @@
+# Core dependencies
+numpy>=1.24.0
+
+# Data loading (one of these is required)
+tensorflow>=2.12.0   # provides keras.datasets
+keras>=2.12.0      # alternative: standalone keras
+
+# Evaluation metrics
+scikit-learn>=1.2.0
+
+# Experiment tracking (optional but recommended)
+wandb>=0.15.0
+
+# Visualisation (optional)
+matplotlib>=3.7.0
