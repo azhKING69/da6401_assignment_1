@@ -33,18 +33,18 @@ def parse_arguments():
     # dataset & training
     parser.add_argument(
         "-d", "--dataset",
-        type=str, default="fashion_mnist",
+        type=str, default="mnist",
         choices=["mnist", "fashion_mnist"],
         help="Dataset to train on.",
     )
     parser.add_argument(
         "-e", "--epochs",
-        type=int, default=20,
+        type=int, default=30,
         help="Number of training epochs.",
     )
     parser.add_argument(
         "-b", "--batch_size",
-        type=int, default=64,
+        type=int, default=128,
         help="Mini-batch size.",
     )
 
@@ -63,12 +63,12 @@ def parse_arguments():
     )
     parser.add_argument(
         "-lr", "--learning_rate",
-        type=float, default=0.001,
+        type=float, default=0.001553536703042097,
         help="Initial learning rate.",
     )
     parser.add_argument(
         "-wd", "--weight_decay",
-        type=float, default=0.0005,
+        type=float, default=0.0001,
         help="L2 regularization coefficient (weight decay).",
     )
 
@@ -80,7 +80,7 @@ def parse_arguments():
     )
     parser.add_argument(
         "-sz", "--hidden_size",
-        type=int, nargs="+", default=[128, 128, 64],
+        type=int, nargs="+", default=[128, 128, 128],
         help=(
             "Neurons per hidden layer. "
             "Provide a list (e.g. -sz 128 128 64) or a single value "
@@ -89,7 +89,7 @@ def parse_arguments():
     )
     parser.add_argument(
         "-a", "--activation",
-        type=str, default="relu",
+        type=str, default="tanh",
         choices=["relu", "sigmoid", "tanh"],
         help="Activation function for all hidden layers.",
     )
@@ -120,12 +120,12 @@ def parse_arguments():
     # misc
     parser.add_argument(
         "--model_path",
-        type=str, default="last_trained_model.npy",
+        type=str, default="best_model.npy",
         help="Relative path to save / load the trained model weights.",
     )
     parser.add_argument(
         "--config_path",
-        type=str, default="last_trained_config.json",
+        type=str, default="best_config.json",
         help="Relative path to save the best hyperparameter config.",
     )
     parser.add_argument(
