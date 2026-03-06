@@ -32,18 +32,18 @@ def parse_arguments():
     # Same CLI as train.py 
     parser.add_argument(
         "-d", "--dataset",
-        type=str, default="fashion_mnist",
+        type=str, default="mnist",
         choices=["mnist", "fashion_mnist"],
         help="Dataset to evaluate on.",
     )
     parser.add_argument(
         "-e", "--epochs",
-        type=int, default=20,
+        type=int, default=30,
         help="(Unused in inference; kept for CLI parity with train.py.)",
     )
     parser.add_argument(
         "-b", "--batch_size",
-        type=int, default=64,
+        type=int, default=128,
         help="Batch size for inference forward passes.",
     )
     parser.add_argument(
@@ -60,12 +60,12 @@ def parse_arguments():
     )
     parser.add_argument(
         "-lr", "--learning_rate",
-        type=float, default=0.001,
+        type=float, default=0.001553536703042097,
         help="(Unused in inference; kept for CLI parity.)",
     )
     parser.add_argument(
         "-wd", "--weight_decay",
-        type=float, default=0.0005,
+        type=float, default=0.0001,
         help="(Unused in inference; kept for CLI parity.)",
     )
     parser.add_argument(
@@ -75,12 +75,12 @@ def parse_arguments():
     )
     parser.add_argument(
         "-sz", "--hidden_size",
-        type=int, nargs="+", default=[128, 128, 64],
+        type=int, nargs="+", default=[128, 128, 128],
         help="Hidden layer sizes (must match the saved model).",
     )
     parser.add_argument(
         "-a", "--activation",
-        type=str, default="relu",
+        type=str, default="tanh",
         choices=["relu", "sigmoid", "tanh"],
         help="Activation function (must match the saved model).",
     )
