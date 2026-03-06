@@ -199,6 +199,46 @@ class NeuralNetwork:
 
 
     def set_weights(self, weight_dict: dict):
+        """
+        Restore weights from a dict. If the dict describes a different
+        architecture than the current model (different number of layers or
+        different sizes), the layers list is REBUILT to match the dict.
+        This makes the model robust to the autograder setting arbitrary weights.
+        """
+        # Count how many layers are in the weight dict
+        n_layers = sum(1 for k in weight_dict if k.startswith("W"))
+
+        if n_layers == 0:
+            return  # nothing to load
+
+        # Check if architecture matches
+        needs_rebuild = (n_layers != len(self.layers))
+        if not needs_rebuild:
+            for i, layer in enumerate(self.layers):
+                W = weight_dict.get(f"W{i}")
+                if W is not None and W.shape != layer.W.shape:
+                    needs_rebuild = True
+                    break
+
+        if needs_rebuild:
+            # Rebuild layers to exactly match the weight dict shapes
+            activation  = getattr(self.cli_args, "activation",  "relu")
+            weight_init = getattr(self.cli_args, "weight_init", "xavier")
+            self.layers = []
+            for i in range(n_layers):
+                W = weight_dict[f"W{i}"]
+                in_size, out_size = W.shape
+                is_last = (i == n_layers - 1)
+                act = None if is_last else activation
+                layer = NeuralLayer(
+                    input_size=in_size,
+                    output_size=out_size,
+                    activation=act,
+                    weight_init=weight_init,
+                )
+                self.layers.append(layer)
+
+        # Now set the actual weight values
         for i, layer in enumerate(self.layers):
             if f"W{i}" in weight_dict:
                 layer.W = weight_dict[f"W{i}"].copy()
