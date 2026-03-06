@@ -29,8 +29,6 @@ class NeuralNetwork:
         input_size  = 784   # flattened 28×28
         output_size = 10    # MNIST / Fashion-MNIST classes
 
-        # ── safe attribute reads ─────────────────────────────────────────────
-        # getattr(obj, name, default) never raises AttributeError
         raw         = getattr(cli_args, "hidden_size",   128)
         num_hidden  = getattr(cli_args, "num_layers",    3)
         activation  = getattr(cli_args, "activation",    "relu")
@@ -40,18 +38,17 @@ class NeuralNetwork:
         lr          = getattr(cli_args, "learning_rate", 0.001)
         wd          = getattr(cli_args, "weight_decay",  0.0)
 
-        # ── resolve hidden layer sizes ───────────────────────────────────────
+        #resolve hidden layer sizes 
         if isinstance(raw, (list, tuple)):
             hidden_sizes = [int(h) for h in raw]
         else:
             hidden_sizes = [int(raw)] * num_hidden
 
-        # extend or truncate to exactly num_hidden layers
         if len(hidden_sizes) < num_hidden:
             hidden_sizes += [hidden_sizes[-1]] * (num_hidden - len(hidden_sizes))
         hidden_sizes = hidden_sizes[:num_hidden]
 
-        # ── build layers ─────────────────────────────────────────────────────
+        #build layers
         layer_sizes = [input_size] + hidden_sizes + [output_size]
         for i in range(len(layer_sizes) - 1):
             is_last = (i == len(layer_sizes) - 2)
@@ -65,7 +62,7 @@ class NeuralNetwork:
                 )
             )
 
-        # ── loss and optimizer ───────────────────────────────────────────────
+        # loss and optimizer 
         self.loss_fn      = get_loss(loss_name)
         self.optimizer    = get_optimizer(opt_name, lr=lr, weight_decay=wd)
         self.weight_decay = wd
