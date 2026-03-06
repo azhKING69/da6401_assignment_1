@@ -13,5 +13,4 @@
     "weight_init": "xavier",
     "loss": "cross_entropy",
     "model_path": "best_model.npy",
-    "wandb_project": "dl_1"
 }
