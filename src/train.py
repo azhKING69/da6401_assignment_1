@@ -120,12 +120,12 @@ def parse_arguments():
     # misc
     parser.add_argument(
         "--model_path",
-        type=str, default="best_model.npy",
+        type=str, default="last_trained_model.npy",
         help="Relative path to save / load the trained model weights.",
     )
     parser.add_argument(
         "--config_path",
-        type=str, default="best_config.json",
+        type=str, default="last_trained_config.json",
         help="Relative path to save the best hyperparameter config.",
     )
     parser.add_argument(
