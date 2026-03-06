@@ -36,7 +36,7 @@ class NeuralNetwork:
         output_size = 10    # MNIST / Fashion-MNIST classes
 
         # resolve hidden layer sizes 
-        raw = cli_args.hidden_size
+        raw = getattr(cli_args, 'hidden_size', 128)
         if isinstance(raw, (list, tuple)):
             hidden_sizes = [int(h) for h in raw]
         else:
