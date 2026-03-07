@@ -103,13 +103,13 @@ def parse_arguments():
     # wandb logging
     parser.add_argument(
         "-w_p", "--wandb_project",
-        type=str, default="da6401_assignment1",
+        type=str, default="da6401_a1_",
         help="Weights & Biases project name.",
     )
     parser.add_argument(
         "--wandb_entity",
         type=str, default=None,
-        help="W&B entity (username or team) — leave empty to use default.",
+        help="W&B entity.",
     )
     parser.add_argument(
         "--no_wandb",
