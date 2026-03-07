@@ -2,7 +2,7 @@
 Main Training Script
 Entry point for training a NumPy MLP on MNIST or Fashion-MNIST.
 
-Usage example:
+example:
     python train.py -d mnist -e 20 -b 64 -l cross_entropy -o rmsprop \\
                    -lr 0.001 -wd 0.0005 -nhl 3 -sz 128 128 64 \\
                    -a relu -w_i xavier -w_p da6401_a1_
@@ -76,7 +76,7 @@ def parse_arguments():
     parser.add_argument(
         "-nhl", "--num_layers",
         type=int, default=3,
-        help="Number of HIDDEN layers (excluding output layer).",
+        help="Number of HIDDEN layers.",
     )
     parser.add_argument(
         "-sz", "--hidden_size",
@@ -244,7 +244,7 @@ def main():
     )
 
     # test evaluation
-    print("\n--- Test Set Evaluation ---")
+    print("\n Test Set Evaluation ")
     test_metrics = compute_full_metrics(model, X_test, y_test)
     print(
         f"  Accuracy  : {test_metrics['accuracy']:.4f}\n"
