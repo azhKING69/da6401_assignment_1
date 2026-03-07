@@ -3,6 +3,7 @@
 ## Links
 
 - **Weights and Biases Report:** https://api.wandb.ai/links/ce23b004-iitm/x8kc7jek
+- **Wandb Project:** https://wandb.ai/ce23b004-iitm/da6401_a1_?nw=nwuserce23b004
 - **GitHub Repository:** https://github.com/azhKING69/da6401_assignment_1
 
 ---
