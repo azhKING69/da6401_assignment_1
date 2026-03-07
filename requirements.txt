@@ -7,6 +7,6 @@ keras>=2.12.0
 # Evaluation metrics
 scikit-learn>=1.2.0
 
-# Experiment tracking (optional but recommended)
+# Experiment tracking 
 wandb>=0.15.0
 
