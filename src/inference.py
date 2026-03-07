@@ -92,7 +92,7 @@ def parse_arguments():
     )
     parser.add_argument(
         "-w_p", "--wandb_project",
-        type=str, default="da6401_assignment1",
+        type=str, default="da6401_a1_",
         help="(Unused in inference; kept for CLI parity.)",
     )
 
@@ -137,7 +137,7 @@ def load_model(model_path: str) -> dict:
     data = np.load(model_path, allow_pickle=True).item()
     return data
 
-# Override CLI args with config from JSON file (if it exists)
+# Override CLI args with config from JSON file , if exists
 def override_args_from_config(args, config_path: str):
     if not os.path.exists(config_path):
         print(f"[Config] '{config_path}' not found — using CLI arguments.")
@@ -239,9 +239,7 @@ def main() -> dict:
     results = evaluate_model(model, X_test, y_test)
 
     # report
-    print("\n" + "=" * 45)
-    print("          INFERENCE RESULTS")
-    print("=" * 45)
+    print(" INFERENCE RESULTS")
     print(f"  Dataset   : {args.dataset}")
     print(f"  Samples   : {X_test.shape[0]}")
     print(f"  Loss      : {results['loss']:.4f}")
@@ -249,9 +247,8 @@ def main() -> dict:
     print(f"  Precision : {results['precision']:.4f}  (macro)")
     print(f"  Recall    : {results['recall']:.4f}  (macro)")
     print(f"  F1-Score  : {results['f1']:.4f}  (macro)")
-    print("=" * 45)
 
-    # Per-class F1
+    # Per class F1
     from sklearn.metrics import classification_report
     print("\nPer-class report:")
     print(
@@ -260,8 +257,6 @@ def main() -> dict:
             target_names=label_names, zero_division=0,
         )
     )
-
-    print("\nEvaluation complete!")
     return results
 
 
