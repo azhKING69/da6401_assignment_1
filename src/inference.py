@@ -1,11 +1,7 @@
 """
 Inference Script
 Load a trained NumPy MLP and evaluate it on a test set.
-
 Outputs: Accuracy, Precision, Recall, F1-score (macro), Loss, and Logits.
-
-Usage example:
-    python inference.py --model_path best_model.npy -d fashion_mnist
 """
 
 import os
@@ -39,7 +35,7 @@ def parse_arguments():
     parser.add_argument(
         "-e", "--epochs",
         type=int, default=30,
-        help="(Unused in inference; kept for CLI parity with train.py.)",
+        help="(same, for CLI parity with train.py.)",
     )
     parser.add_argument(
         "-b", "--batch_size",
@@ -50,39 +46,39 @@ def parse_arguments():
         "-l", "--loss",
         type=str, default="cross_entropy",
         choices=["cross_entropy", "mse"],
-        help="Loss function used during training (must match the saved model).",
+        help="Loss function used during training.",
     )
     parser.add_argument(
         "-o", "--optimizer",
         type=str, default="rmsprop",
         choices=["sgd", "momentum", "nag", "rmsprop"],
-        help="(Unused in inference; kept for CLI parity.)",
+        help="(no need, kept for CLI parity.)",
     )
     parser.add_argument(
         "-lr", "--learning_rate",
         type=float, default=0.001553536703042097,
-        help="(Unused in inference; kept for CLI parity.)",
+        help="(no need, kept for CLI parity.)",
     )
     parser.add_argument(
         "-wd", "--weight_decay",
         type=float, default=0.0001,
-        help="(Unused in inference; kept for CLI parity.)",
+        help="(no need, kept for CLI parity.)",
     )
     parser.add_argument(
         "-nhl", "--num_layers",
         type=int, default=3,
-        help="Number of hidden layers (must match the saved model).",
+        help="Number of hidden layers ,must match the saved model.",
     )
     parser.add_argument(
         "-sz", "--hidden_size",
         type=int, nargs="+", default=[128, 128, 128],
-        help="Hidden layer sizes (must match the saved model).",
+        help="Hidden layer sizes ,must match the saved model.",
     )
     parser.add_argument(
         "-a", "--activation",
         type=str, default="tanh",
         choices=["relu", "sigmoid", "tanh"],
-        help="Activation function (must match the saved model).",
+        help="Activation function ,must match the saved model.",
     )
     parser.add_argument(
         "-w_i", "--weight_init",
@@ -93,7 +89,7 @@ def parse_arguments():
     parser.add_argument(
         "-w_p", "--wandb_project",
         type=str, default="da6401_a1_",
-        help="(Unused in inference; kept for CLI parity.)",
+        help="(no need, kept for CLI parity.)",
     )
 
     # Inference specific arguments
@@ -105,12 +101,12 @@ def parse_arguments():
     parser.add_argument(
         "--config_path",
         type=str, default="best_config.json",
-        help="Optional: load architecture config from JSON instead of CLI flags.",
+        help="load architecture config from JSON instead of CLI flags.",
     )
     parser.add_argument(
         "--val_split",
         type=float, default=0.1,
-        help="Validation split fraction (unused; evaluation is on the test split).",
+        help="Validation split fraction.",
     )
     parser.add_argument(
         "--seed",
@@ -121,7 +117,7 @@ def parse_arguments():
         "--no_wandb",
         action="store_true",
         default=True,
-        help="Disable W&B logging during inference (default: True).",
+        help="Disable W&B logging during inference.",
     )
 
     return parser.parse_args()
@@ -137,7 +133,7 @@ def load_model(model_path: str) -> dict:
     data = np.load(model_path, allow_pickle=True).item()
     return data
 
-# Override CLI args with config from JSON file , if exists
+# Override CLI args with config from JSON file , if any
 def override_args_from_config(args, config_path: str):
     if not os.path.exists(config_path):
         print(f"[Config] '{config_path}' not found — using CLI arguments.")
